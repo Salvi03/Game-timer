@@ -18,6 +18,15 @@
 
     <div id="app">
         <h1 class="text-center">Game Timer</h1>
+        <h6 class="text-center"><a href="" @click.prevent="toggleCaption" v-if="!caption">Breve descrizione</a></h6>
+        <div class="container">
+            <h6 class="text-center" v-if="caption">
+                Qui sotto ci sono tre spazi testuali, nel primo dovrai inserire i minuti da impostare per il timer,<br>
+                la seconda area &egrave; quella dedicata ai secondi, mentre l'ultima &egrave; dedicata all'intervallo di tempo
+                tra un timer e l'altro
+                <br><a href="" @click.prevent="toggleCaption" v-if="caption">Mostra di meno</a>
+            </h6>
+        </div>
         <div class="container bd-example" v-if="!submitted">
             <form @submit.prevent="submitData">
                 <div class="form-group">

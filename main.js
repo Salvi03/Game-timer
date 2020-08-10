@@ -65,6 +65,7 @@ var app = new Vue({
         submitted: false,
         did_reset: false,
         submit_text: "Submit data",
+        caption: false,
 
         timerdata: {
             minutes: null,
@@ -108,6 +109,10 @@ var app = new Vue({
             this.isStopped = !this.isStopped;
         },
 
+        toggleCaption: function name(params) {
+            this.caption = !this.caption;
+        },
+
         goTimer: function() {
             if (!this.did_reset) {
                 this.isStarted = true;
@@ -122,15 +127,6 @@ var app = new Vue({
         },
 
         submitData: function() {
-            // if (this.mins !== null && this.secs !== null && this.interval !== null) {
-            //     this.secs = parseInt(this.secs);
-            //     this.mins = parseInt(this.mins);
-            //     if (this.interval !== null) {
-            //         this.interval = parseInt(this.interval);
-            //     }else {
-            //         this.interval = 0;
-            //     }
-            // } else {
             if (this.mins == null) {
                 this.mins = this.default.minutes;
             } else {
