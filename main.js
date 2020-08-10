@@ -66,6 +66,7 @@ var app = new Vue({
         did_reset: false,
         submit_text: "Submit data",
         caption: false,
+        is_timer: false,
 
         timerdata: {
             minutes: null,
@@ -150,7 +151,9 @@ var app = new Vue({
             this.timerdata.minutes = this.mins;
 
             this.timerdata.interval = this.interval;
-            this.submitted = true
+            this.submitted = true;
+
+            this.is_timer = true;
         },
 
         resetTimer: function() {
@@ -167,6 +170,7 @@ var app = new Vue({
             this.submitted = false;
 
             this.did_reset = true;
+            this.is_timer = false;
         }
     }
 })
