@@ -18,7 +18,17 @@ Vue.component("timer", {
 
     methods: {
         getTimer: function() {
-            return `${ this.mins }:${ this.secs }`;
+            if (this.secs > 9) {
+                if (this.mins > 9) {
+                    return `${ this.mins }:${ this.secs }`;
+                }
+                return `0${ this.mins }:${ this.secs }`;
+            }
+
+            if (this.mins > 9) {
+                return `${ this.mins }:0${ this.secs }`;
+            }
+            return `0${ this.mins }:0${ this.secs }`;
         },
 
     },
@@ -34,9 +44,12 @@ Vue.component("timer", {
     },
 
     template: `
-        <div class="container justify-content-center">
-            <h1>{{ getTimer() }}</h1>
-        </div>
+        <style>
+            .timer {
+                font-size: 6em;
+            }
+        </style>
+        <h1 class="text-center timer">{{ getTimer() }}</h1>
     `
 })
 
@@ -50,11 +63,19 @@ var app = new Vue({
         isStopped: false,
         isStarted: false,
         submitted: false,
+        did_reset: false,
+        submit_text: "Submit data",
 
         timerdata: {
             minutes: null,
             seconds: null,
             interval: null
+        },
+
+        default: {
+            minutes: 5,
+            seconds: 0,
+            interval: 15
         }
     },
 
@@ -88,28 +109,68 @@ var app = new Vue({
         },
 
         goTimer: function() {
-            this.isStarted = true;
-            setInterval(function(){
-                if (!app.isStopped) {
-                    app.timer();
-                }
-            }, 1000);
+            if (!this.did_reset) {
+                this.isStarted = true;
+                setInterval(function(){
+                    if (!app.isStopped && app.isStarted) {
+                        app.timer();
+                    }
+                }, 1000);
+            } else {
+                this.isStarted = true
+            }
         },
 
         submitData: function() {
-            this.secs = parseInt(this.secs);
-            this.mins = parseInt(this.mins);
-            if (this.interval !== null) {
-                this.interval = parseInt(this.interval);
-            }else {
-                this.interval = 0;
+            // if (this.mins !== null && this.secs !== null && this.interval !== null) {
+            //     this.secs = parseInt(this.secs);
+            //     this.mins = parseInt(this.mins);
+            //     if (this.interval !== null) {
+            //         this.interval = parseInt(this.interval);
+            //     }else {
+            //         this.interval = 0;
+            //     }
+            // } else {
+            if (this.mins == null) {
+                this.mins = this.default.minutes;
+            } else {
+                this.mins = parseInt(Math.abs(this.mins));
             }
+
+            if (this.secs == null) {
+                this.secs = this.default.seconds;
+            } else {
+                this.secs = parseInt(Math.abs(this.secs));
+            }
+
+            if (this.interval == null) {
+                this.interval = this.default.interval;
+            } else {
+                this.interval = parseInt(Math.abs(this.interval));
+            }
+            // }
 
             this.timerdata.seconds = this.secs;
             this.timerdata.minutes = this.mins;
 
             this.timerdata.interval = this.interval;
             this.submitted = true
+        },
+
+        resetTimer: function() {
+            this.secs = null;
+            this.mins = null;
+            this.interval = null;
+
+            this.timerdata.seconds = null;
+            this.timerdata.minutes = null;
+            this.timerdata.interval = null;
+
+            this.isStarted = false;
+            this.isStopped = false;
+            this.submitted = false;
+
+            this.did_reset = true;
         }
     }
 })

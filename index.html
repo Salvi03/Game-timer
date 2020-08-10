@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,19 +13,28 @@
     </style>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" 
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" 
-        crossorigin="anonymous"
-    >
+    <script src="vue.min.js"></script>
+    <link href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet">
 
     <div id="app">
+        <h1 class="text-center">Game Timer</h1>
         <div class="container bd-example" v-if="!submitted">
             <form @submit.prevent="submitData">
-                <input type="number" name="" v-model="mins" id="">
-                <input type="number" name="" v-model="secs" id="">
-                <input type="number" name="" v-model="interval" id="">
-                <input type="submit" value="" class="btn btn-lg btn-outline-danger" value="submit data">
+                <div class="form-group">
+                    <label for="minutes">Inserisci i minuti del timer</label>
+                    <input type="number" name="" class="form-control" v-model="mins" id="minutes" placeholder="default: 5">
+                </div>
+                <div class="form-group">
+                    <label for="secods">Inserisci i secondi del timer</label>
+                    <input type="number" name="" class="form-control" v-model="secs" id="seconds" placeholder="default: 0">
+                </div>
+                <div class="form-group">
+                    <label for="interval">Inserisci l'intervallo di tempo</label>
+                    <input type="number" name="" class="form-control" v-model="interval" id="interval" placeholder="default: 15">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="" class="btn btn-lg btn-outline-danger" :value="submit_text">
+                </div>
             </form>
         </div>
         <div class="container justify-content-center" v-else>
@@ -35,13 +44,12 @@
                 :interval="interval"
             ></timer>
             <button class="btn btn-lg btn-danger" v-if="!isStarted" @click="goTimer">Avvia timer</button>
-            <button class="btn btn-mb btn-danger" v-if="!isStopped && isStarted" @click="toggleTimer">Pausa</button>
-            <button class="btn btn-mb btn-success" v-else-if="isStopped && isStarted" @click="toggleTimer">Play</button>
+            <button class="btn btn-lg btn-danger" v-if="!isStopped && isStarted" @click="toggleTimer">Pausa</button>
+            <button class="btn btn-lg btn-success" v-if="isStopped && isStarted" @click="toggleTimer">Play</button>
+            <button class="btn btn-lg btn-outline-danger" v-if="isStarted" @click="resetTimer">Reset Timer</button>
         </div>
     </div>
     <script src="main.js"></script>
-    <script>
-        // setInterval(1000, app.decreaseTimer())
-    </script>
+    <script src="css/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
