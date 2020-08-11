@@ -170,6 +170,8 @@ var app = new Vue({
 
             this.isStarted = false;
             this.isStopped = false;
+            this.isInterval = false;
+
             this.submitted = false;
 
             this.did_reset = true;
