@@ -69,6 +69,8 @@ var app = new Vue({
         caption: false,
         is_timer: false,
 
+        wantsAudio: true,
+
         timerdata: {
             minutes: null,
             seconds: null,

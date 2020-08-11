@@ -44,6 +44,9 @@
                     <input type="number" name="" class="form-control" v-model="interval" id="interval" placeholder="default: 15">
                 </div>
                 <div class="form-group">
+                    <input type="checkbox" name="" id="audio" v-model="wantsAudio">
+                    </div>
+                <div class="form-group">
                     <input type="submit" value="" class="btn btn-lg btn-outline-danger" :value="submit_text">
                 </div>
             </form>
@@ -59,7 +62,7 @@
             <button class="btn btn-lg btn-success" v-if="isStopped && isStarted" @click="toggleTimer">Play</button>
             <button class="btn btn-lg btn-outline-danger" v-if="isStarted" @click="resetTimer">Reset Timer</button>
             
-            <audio src="audio/sveglia.mp3" autoplay v-if="isInterval && !isStopped"></audio>
+            <audio src="audio/sveglia.mp3" autoplay v-if="isInterval && !isStopped && wantsAudio"></audio>
         </div>
     </div>
     <script src="main.js"></script>
