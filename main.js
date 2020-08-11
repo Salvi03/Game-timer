@@ -33,16 +33,6 @@ Vue.component("timer", {
 
     },
 
-    data: function(){
-        return {
-            minutes: this.mins,
-            seconds: this.secs,
-
-            isInterval: false,
-            isStopped: false
-        }
-    },
-
     template: `
         <style>
             .timer {
