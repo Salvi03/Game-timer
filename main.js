@@ -62,6 +62,7 @@ var app = new Vue({
         interval: null,
         isStopped: false,
         isStarted: false,
+        isInterval: false,
         submitted: false,
         did_reset: false,
         submit_text: "Submit data",

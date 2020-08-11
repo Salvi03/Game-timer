@@ -58,6 +58,8 @@
             <button class="btn btn-lg btn-danger" v-if="!isStopped && isStarted" @click="toggleTimer">Pausa</button>
             <button class="btn btn-lg btn-success" v-if="isStopped && isStarted" @click="toggleTimer">Play</button>
             <button class="btn btn-lg btn-outline-danger" v-if="isStarted" @click="resetTimer">Reset Timer</button>
+            
+            <audio src="audio/sveglia.mp3" autoplay v-if="isInterval"></audio>
         </div>
     </div>
     <script src="main.js"></script>
