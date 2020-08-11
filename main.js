@@ -33,16 +33,6 @@ Vue.component("timer", {
 
     },
 
-    data: function(){
-        return {
-            minutes: this.mins,
-            seconds: this.secs,
-
-            isInterval: false,
-            isStopped: false
-        }
-    },
-
     template: `
         <style>
             .timer {
@@ -62,9 +52,14 @@ var app = new Vue({
         interval: null,
         isStopped: false,
         isStarted: false,
+        isInterval: false,
         submitted: false,
         did_reset: false,
         submit_text: "Submit data",
+        caption: false,
+        is_timer: false,
+
+        wantsAudio: true,
 
         timerdata: {
             minutes: null,
@@ -108,6 +103,10 @@ var app = new Vue({
             this.isStopped = !this.isStopped;
         },
 
+        toggleCaption: function name(params) {
+            this.caption = !this.caption;
+        },
+
         goTimer: function() {
             if (!this.did_reset) {
                 this.isStarted = true;
@@ -122,15 +121,6 @@ var app = new Vue({
         },
 
         submitData: function() {
-            // if (this.mins !== null && this.secs !== null && this.interval !== null) {
-            //     this.secs = parseInt(this.secs);
-            //     this.mins = parseInt(this.mins);
-            //     if (this.interval !== null) {
-            //         this.interval = parseInt(this.interval);
-            //     }else {
-            //         this.interval = 0;
-            //     }
-            // } else {
             if (this.mins == null) {
                 this.mins = this.default.minutes;
             } else {
@@ -154,7 +144,9 @@ var app = new Vue({
             this.timerdata.minutes = this.mins;
 
             this.timerdata.interval = this.interval;
-            this.submitted = true
+            this.submitted = true;
+
+            this.is_timer = true;
         },
 
         resetTimer: function() {
@@ -168,9 +160,12 @@ var app = new Vue({
 
             this.isStarted = false;
             this.isStopped = false;
+            this.isInterval = false;
+
             this.submitted = false;
 
             this.did_reset = true;
+            this.is_timer = false;
         }
     }
 })
