@@ -92,7 +92,6 @@ var app = new Vue({
                 if (this.secs == 0){
                     this.secs = 59;
                     this.mins--;
-                    
                 } else {
                     this.secs--;
                 }
